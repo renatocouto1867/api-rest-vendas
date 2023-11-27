@@ -1,0 +1,10 @@
+INSERT INTO Produto (titulo, descricao, ean, preco, estoque, loja) VALUES ('iPhone 13', 'Descrição do iPhone 13', '885101611556', 1099.99, 50, 'Apple Store');
+INSERT INTO Produto (titulo, descricao, ean, preco, estoque, loja) VALUES ('Samsung Galaxy S21', 'Descrição do Samsung Galaxy S21', '8806090710202', 899.99, 75, 'Samsung Store');
+INSERT INTO Produto (titulo, descricao, ean, preco, estoque, loja) VALUES ('Sony PlayStation 5', 'Descrição do PlayStation 5', '711719825516', 499.99, 30, 'GameStop');
+INSERT INTO Produto (titulo, descricao, ean, preco, estoque, loja) VALUES ('Dell XPS 13', 'Descrição do Dell XPS 13', '884116366566', 1299.99, 20, 'Dell Store');
+INSERT INTO Produto (titulo, descricao, ean, preco, estoque, loja) VALUES ('Nike Air Max 270', 'Descrição do Nike Air Max 270', '823233284397', 149.99, 100, 'Nike Store');
+INSERT INTO Produto (titulo, descricao, ean, preco, estoque, loja) VALUES ('Canon EOS R5', 'Descrição do Canon EOS R5', '013803338320', 3799.99, 10, 'Best Buy');
+INSERT INTO Produto (titulo, descricao, ean, preco, estoque, loja) VALUES ('MacBook Pro', 'Descrição do MacBook Pro', '190198649829', 1999.99, 15, 'Apple Store');
+INSERT INTO Produto (titulo, descricao, ean, preco, estoque, loja) VALUES ('Fitbit Charge 5', 'Descrição do Fitbit Charge 5', '811138037066', 179.99, 50, 'Fitbit Store');
+INSERT INTO Produto (titulo, descricao, ean, preco, estoque, loja) VALUES ('LG OLED C1', 'Descrição do LG OLED C1', '719192641025', 1999.99, 5, 'LG Electronics Store');
+INSERT INTO Produto (titulo, descricao, ean, preco, estoque, loja) VALUES ('FIFA 22', 'Descrição do FIFA 22', '014633741522', 59.99, 200, 'GameStop');
