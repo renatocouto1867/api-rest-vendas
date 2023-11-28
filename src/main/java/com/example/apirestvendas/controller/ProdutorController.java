@@ -2,11 +2,14 @@ package com.example.apirestvendas.controller;
 
 import com.example.apirestvendas.model.entity.Produto;
 import com.example.apirestvendas.repository.ProdutoRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -16,9 +19,17 @@ public class ProdutorController {
     //@Autowired //passa para o Spring a obrigação de instanciar o objeto
     private final ProdutoRepository produtoRepository;
 
+    /**
+     * ResponseEntity significa "entidade de Resposat".
+     * Entidade é um objeto. Mais isto nada mais é  do que
+     * um tipo que indica uma resposta de uma API HTTP (REST)
+     */
     @GetMapping("/{id}")
-    public Produto findById(@PathVariable final Long id) {
-        return produtoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public ResponseEntity<Produto> findById(@PathVariable final Long id) {
+        return produtoRepository.findById(id).map(ResponseEntity::ok)
+                //map responseEntity::ok so chama o mpa se o produto foi localizado
+                .orElseGet(() -> ResponseEntity.notFound().build()); //senão, executa o orelseGet
+        //return produtoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @GetMapping("/ean/{ean}")
@@ -37,19 +48,22 @@ public class ProdutorController {
     }
 
     @PostMapping
-    public long insert(@RequestBody Produto produto){
-        return produtoRepository.save(produto).getId();
-
+    public ResponseEntity<Produto> insert(@Valid @RequestBody Produto produto) {
+        produto = produtoRepository.save(produto);
+        URI location = URI.create("/produto/"+produto.getId());
+        return ResponseEntity.created(location).body(produto);
     }
 
     @PutMapping("/{id}")
-    public void update (@PathVariable long id, @RequestBody Produto produto){
-        System.out.println(produto);
-        produtoRepository.save(produto);
+    public ResponseEntity<Produto> update(@PathVariable long id, @Valid @RequestBody Produto produto) {
+        if (id == produto.getId()) {
+            return ResponseEntity.accepted().body(produtoRepository.save(produto));
+        }
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 
     @DeleteMapping("/{id}")
-    public void  delete(@PathVariable final long id){
+    public void delete(@PathVariable final long id) {
         produtoRepository.deleteById(id);
     }
 
